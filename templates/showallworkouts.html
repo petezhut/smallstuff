@@ -1,0 +1,12 @@
+{% extends "basic.html" %}
+{% block body %}
+{% for d in data %}
+<fieldset><legend>{{ d['name' ] }}</legend>
+    <ul>
+    {% for exercise in d['exercises'] %}
+        <li>{{ exercise }}</li>
+    {% endfor %}
+    </ul>
+</fieldset>
+{% endfor %}
+{% endblock %}
