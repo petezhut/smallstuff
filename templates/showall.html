@@ -1,0 +1,8 @@
+{% extends "basic.html" %}
+{% block body %}
+<ul>
+{% for exercises in data %}
+    <li>{{ exercises['name'] }}</li>
+  {% endfor %}
+ </ul>
+{% endblock %}

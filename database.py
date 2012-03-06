@@ -10,3 +10,8 @@ class Database:
         workouts = db.workouts
         exercises = db.exercises
 
+    def addExercise(self, name):
+        self.conn.smallstuff.exercises.insert({'name' : name})
+    
+    def getAllExercises(self):
+        return self.conn.smallstuff.exercises.find()
