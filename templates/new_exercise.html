@@ -1,0 +1,9 @@
+{% extends "basic.html" %}
+{% block body %}
+<form method="post" action="/new_exercise">
+    <dl>
+        {{ form.exercise_name }}
+    </dl>
+    <p><input type=submit value="New Exercise">
+</form>
+{% endblock %}
