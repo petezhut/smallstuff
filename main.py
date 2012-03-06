@@ -1,12 +1,12 @@
 from flask import Flask, request, render_template, redirect, url_for
-from wtforms import Form, TextField
 import database
+import forms
 
 app = Flask("SmallStuff")
 app.debug = True
 
 DB = database.Database()
-
+DB.DbInit()
 @app.route("/")
 def index():
     return render_template('basic.html', title = "SmallStuff")
@@ -15,12 +15,9 @@ def index():
 def showall():
     return render_template("showall.html", data=DB.exercises.find())
 
-class NewExerciseForm(Form):
-    exercise_name = TextField("Exercise Name")
-
 @app.route("/new_exercise", methods = ['GET', 'POST'])
 def new_exercise():
-    form = NewExerciseForm(request.form)
+    form = forms.NewExerciseForm(request.form)
     if request.method == 'POST':
         DB.exercises.insert({'name' : form.exercise_name.data})
         return redirect(url_for('showall'))
