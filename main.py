@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
 from wtforms import Form, TextField
 import database
 
@@ -11,9 +11,9 @@ DB = database.Database()
 def index():
     return render_template('basic.html', title = "SmallStuff")
 
-@app.route("/all")
-def all():
-    return render_template("showall.html", data=DB.getAllExercises())
+@app.route("/showall")
+def showall():
+    return render_template("showall.html", data=DB.exercises.find())
 
 class NewExerciseForm(Form):
     exercise_name = TextField("Exercise Name")
@@ -22,8 +22,8 @@ class NewExerciseForm(Form):
 def new_exercise():
     form = NewExerciseForm(request.form)
     if request.method == 'POST':
-        DB.addExercise(form.exercise_name.data)
-        return form.exercise_name.data
+        DB.exercises.insert({'name' : form.exercise_name.data})
+        return redirect(url_for('showall'))
     return render_template('new_exercise.html', form=form)
 
 
