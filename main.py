@@ -27,4 +27,4 @@ def new_exercise():
 
 
 if __name__ == '__main__':
-    app.run(host="192.168.1.110")
+    app.run()
