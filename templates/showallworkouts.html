@@ -1,7 +1,7 @@
 {% extends "basic.html" %}
 {% block body %}
 {% for d in data %}
-<fieldset><legend>{{ d['name' ] }}</legend>
+<fieldset><legend><a href='/workout/{{ d['name' ] }}'>{{ d['name'] }}</a></legend>
     <ul>
     {% for exercise in d['exercises'] %}
         <li>{{ exercise }}</li>

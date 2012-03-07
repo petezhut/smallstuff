@@ -1,10 +1,10 @@
 {% extends "basic.html" %}
 {% block body %}
-    <form method="post" action="/new_workout">
-        <table>
-            <tr><td>Workout Name</td><td>{{ form.workout_name }}</td></tr>
-            <tr><td>Exercise Name</td><td>{{ form.exercise_list }}</td></tr>
-            <tr><td colspan=2 align=right><input type=submit value="New Workout"></td></tr>
-        </table>
-    </form>
+<form method="post" action="/new_workout">
+    <table>
+        <tr><td>Workout Name</td><td>{{ form.workout_name }}</td></tr>
+        <tr><td>Exercises</td><td>{{ form.exercise_list }}</td></tr>
+        <tr><td colspan=2 align=right><input type=submit value="New Workout"></td></tr>
+    </table>
+</form>
 {% endblock %}

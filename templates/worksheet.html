@@ -1,0 +1,26 @@
+{% extends "basic.html" %}
+{% block body %}
+<form method="post" action="/workout/{{ data['name'] }}">
+    <fieldset><legend>{{ data['name'] }}</legend>
+    <fieldset><legend>Basic Data</legend>
+        <table>
+            <tr><td>Workout Date</td><td>{{ form.workout_date }}</td></tr>
+            <tr><td>Workout Journal</td><td>{{ form.workout_journal(rows=30, cols=50) }}</td></tr>
+        </table>
+    </fieldset>
+    <fieldset><legend>Exercise Data</legend>
+        <table>
+            {% for exercise_data in data['exercises'] %}
+                {% for exercise in exercise_data %}
+                    <tr><td>{{ exercise }}</td>
+                    {% for exercise_tracking in exercise_data[exercise] %}
+                        <td>{{ exercise_tracking }}: <input type=text name={{ exercise }}_{{ exercise_tracking }}></td>
+                    {% endfor %}
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </fieldset>
+    <input type=submit value="Submit Worksheet">
+</form>
+{% endblock %}

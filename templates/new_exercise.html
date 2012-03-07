@@ -1,8 +1,12 @@
 {% extends "basic.html" %}
 {% block body %}
 <form method="post" action="/new_exercise">
-    	<dl>{{ form.exercise_name }}<br>
-        {{ form.exercise_list }}</dl>
-    <p><input type=submit value="New Exercise">
+    <fieldset><legend>New Exercise</legend>
+        <table>
+            <tr><td>Exercise Name</td><td>{{ form.exercise_name }}</td></tr>
+            <tr><td>Exercise Tracking</td><td>{{ form.exercise_tracking }}</td></tr>
+            <tr><td colspan=2 align=right><input type=submit value="New Exercise"></td></tr>
+        </table>
+    </fieldset>
 </form>
 {% endblock %}
