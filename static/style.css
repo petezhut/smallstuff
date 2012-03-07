@@ -3,10 +3,40 @@ body {
     background: #eee;
 }
 
+td {
+    vertical-align: top;
+}
+
+a {
+    text-decoration: none;
+}
+
 .page { 
     margin: 2em auto;
-    width: 35em;
-    border: 5px solid #ccc;
+    width: 45em;
+    border: 2px solid #ccc;
     padding: 0.8em; 
     background: white;
+    position: absolute;
+    top: 20px;
+    left: 15em;
 }
+
+.navbar {
+    margin: 2em auto;
+    width: 12em;
+    border: 2px solid #ccc;
+    padding: 0.8em; 
+    background: white;
+    position: absolute;
+    top: 20px;
+    left: 5px;
+}
+.worksheet {
+    background: #ccc;
+}
+
+.formdata {
+    background: white;
+}
+

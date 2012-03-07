@@ -1,13 +1,15 @@
 {% extends "basic.html" %}
 {% block body %}
 <form method="post" action="/workout/{{ data['name'] }}">
-    <fieldset><legend>{{ data['name'] }}</legend>
+    <div class=formdata>
     <fieldset><legend>Basic Data</legend>
         <table>
             <tr><td>Workout Date</td><td>{{ form.workout_date }}</td></tr>
             <tr><td>Workout Journal</td><td>{{ form.workout_journal(rows=30, cols=50) }}</td></tr>
         </table>
     </fieldset>
+    </div>
+    <div class=formdata>
     <fieldset><legend>Exercise Data</legend>
         <table>
             {% for exercise_data in data['exercises'] %}
