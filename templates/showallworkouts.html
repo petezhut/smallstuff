@@ -1,5 +1,6 @@
 {% extends "basic.html" %}
 {% block body %}
+<a href='/new_workout'>Add New Workout</a>
 {% for d in data %}
 <fieldset><legend><a href='/workout/{{ d['name' ] }}'>{{ d['name'] }}</a></legend>
     <ul>

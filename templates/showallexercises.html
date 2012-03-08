@@ -1,5 +1,6 @@
 {% extends "basic.html" %}
 {% block body %}
+<a href='/new_exercise'>Add New Exercise</a>
 <ul>
 {% for exercises in data %}
     <li>{{ exercises['name'] }}</li>

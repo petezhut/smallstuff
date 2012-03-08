@@ -9,23 +9,15 @@ app.debug = True
 DB = database.Database()
 #DB.DbInit()
 
-LINKS = {
-        'Workouts' : "/workouts",
-        'Exercises' : '/exercises',
-        'Create New Workout' : '/new_workout',
-        'Add New Exercise' : '/new_exercise',
-        }
-
 def get_lastWorksheet(workout_name):
     return max(DB.workout.find({'name' : workout_name}))
 
 @app.route("/exercises")
 def exercises():
-    return render_template("showallexercises.html", data=DB.exercises.find(), title="SmallStuff", links=LINKS)
-
+    return render_template("showallexercises.html", data=DB.exercises.find(), title="SmallStuff")
 @app.route("/workouts")
 def workouts():
-    return render_template("showallworkouts.html", data=DB.workouts.find(), title="SmallStuff", links=LINKS)
+    return render_template("showallworkouts.html", data=DB.workouts.find(), title="SmallStuff")
 
 @app.route("/workout/<workout_name>", methods = ['GET', 'POST'])
 def workout(workout_name):
@@ -43,7 +35,7 @@ def workout(workout_name):
         DB.workout.insert({'date' : form.workout_date.data.isoformat(), 'name' : workout_name,  'journal' : form.workout_journal.data, 'tracking' : d })
         return redirect(url_for('index'))
     data={ 'name' : DB.workouts.find_one({'name' : workout_name})['name'], 'exercises' : exercises }
-    return render_template("worksheet.html", data=data, history=get_lastWorksheet(workout_name), form=form, title="SmallStuff", links=LINKS, date=date.today().strftime("%Y-%m-%d"))
+    return render_template("worksheet.html", data=data, history=get_lastWorksheet(workout_name), form=form, title="SmallStuff", date=date.today().strftime("%Y-%m-%d"))
 
 @app.route("/new_exercise", methods = ['GET', 'POST'])
 def new_exercise():
@@ -51,7 +43,7 @@ def new_exercise():
     if request.method == 'POST':
         DB.exercises.insert({'name' : form.exercise_name.data, 'tracking' : form.exercise_tracking.data })
         return redirect(url_for('exercises'))
-    return render_template('new_exercise.html', form=form, title="SmallStuff", links=LINKS)
+    return render_template('new_exercise.html', form=form, title="SmallStuff")
 
 @app.route("/new_workout", methods = ['GET', 'POST'])
 def new_workout():
@@ -59,11 +51,11 @@ def new_workout():
     if request.method == 'POST':
         DB.workouts.insert({'name' : form.workout_name.data, 'exercises' : form.exercise_list.data })
         return redirect(url_for('workouts'))
-    return render_template('new_workout.html', form=form, title="SmallStuff", links=LINKS)
+    return render_template('new_workout.html', form=form, title="SmallStuff")
 
 @app.route("/")
 def index():
-    return render_template('basic.html', title="SmallStuff", links=LINKS)
+    return render_template('basic.html', title="SmallStuff")
 
 
 if __name__ == '__main__':
