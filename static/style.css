@@ -33,6 +33,10 @@ a {
     text-decoration: none;
 }
 
+td.nodata {
+    background-color: darkgray;
+}
+
 .page { 
     margin: 2em auto;
     width: 65%;

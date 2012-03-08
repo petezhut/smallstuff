@@ -4,9 +4,9 @@
     <div class=formdata>
     <fieldset><legend>Basic Data</legend>
         <table>
-            <tr><td>Workout Date</td><td>{{ form.workout_date }}</td></tr>
-            <tr><td>Workout Journal</td><td>{{ form.workout_journal(rows=15, cols=50) }}</td></tr>
-            <tr><td>Workout Journal - {{ history['date'] }}</td><td>{{ history['journal'] }}</td></tr>
+            <tr><td width=20%>Workout Date</td><td>{{ form.workout_date }}</td></tr>
+            <tr><td width=20%>Workout Journal</td><td>{{ form.workout_journal(rows=15, cols=50) }}</td></tr>
+            <tr><td width=20%>Workout Journal - {{ history['date'] }}</td><td>{{ history['journal'] }}</td></tr>
         </table>
     </fieldset>
     </div>
@@ -33,44 +33,44 @@
             <tr>
             {% for exercise_data in data['exercises'] %}
                 {% for exercise in exercise_data %}
-                    <tr id=exercise><td>{{ exercise }}</td>
+                    <tr><td>{{ exercise }}</td>
                     {% if "Sets" in exercise_data[exercise] %}
                         <td><input type=text name={{ exercise }}_Sets size=10></td>
                         <td align=center>{{ history['tracking'][exercise]['Sets'] }}</td>
                     {% else %}
-                        <td></td>
-                        <td></td>
+                        <td class=nodata></td>
+                        <td class=nodata></td>
                     {% endif %}
                     {% if "Reps" in exercise_data[exercise] %}
                         <td><input type=text name={{ exercise }}_Reps size=10></td>
                         <td align=center>{{ history['tracking'][exercise]['Reps'] }}</td>
                     {% else %}
-                        <td></td>
-                        <td></td>
+                        <td class=nodata></td>
+                        <td class=nodata></td>
                     {% endif %}
                     {% if "Weight" in exercise_data[exercise] %}
                         <td><input type=text name={{ exercise }}_Weight size=10></td>
                         <td align=center>{{ history['tracking'][exercise]['Weight'] }}</td>
                     {% else %}
-                        <td></td>
-                        <td></td>
+                        <td class=nodata></td>
+                        <td class=nodata></td>
                     {% endif %}
                     {% if "Time" in exercise_data[exercise] %}
                         <td><input type=text name={{ exercise }}_Time size=10></td>
                         <td align=center>{{ history['tracking'][exercise]['Time'] }}</td>
                     {% else %}
-                        <td></td>
-                        <td></td>
+                        <td class=nodata></td>
+                        <td class=nodata></td>
                     {% endif %}
                     {% if "Distance" in exercise_data[exercise] %}
                         <td><input type=text name={{ exercise }}_Distance size=10></td>
                         <td align=center>{{ history['tracking'][exercise]['Distance'] }}</td>
                     {% else %}
-                        <td></td>
-                        <td></td>
+                        <td class=nodata></td>
+                        <td class=nodata></td>
                     {% endif %}
                     <td><textarea name={{ exercise }}_journal cols=20 rows=5></textarea></td>
-                    <td><textarea cols=20 rows=5>{{ history['tracking'][exercise]['journal'] }}</textarea></td>
+                    <td><textarea readonly=readonly cols=20 rows=5>{{ history['tracking'][exercise]['journal'] }}</textarea></td>
                 {% endfor %}
             {% endfor %}
         </table>
