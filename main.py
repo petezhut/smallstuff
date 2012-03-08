@@ -16,6 +16,9 @@ LINKS = {
         'Add New Exercise' : '/new_exercise',
         }
 
+def get_lastWorksheet(workout_name):
+    return max(DB.workout.find({'name' : workout_name}))
+
 @app.route("/exercises")
 def exercises():
     return render_template("showallexercises.html", data=DB.exercises.find(), title="SmallStuff", links=LINKS)
@@ -28,19 +31,19 @@ def workouts():
 def workout(workout_name):
     form = forms.WorkoutForm(request.form)
     exercises = map(lambda x: {x : DB.exercises.find_one({'name' : x})['tracking']}, DB.workouts.find_one({'name' : workout_name})['exercises'])
+    
     if request.method == 'POST':
         d = {}
         for exercise_d in exercises:
             for exercise in exercise_d:
                 d[exercise] = {}
+                d[exercise]['journal'] = request.form['%s_journal' % (exercise)]
                 for exercise_tracking in exercise_d[exercise]:
                     d[exercise][exercise_tracking] = request.form['%s_%s' % (exercise, exercise_tracking)]
-        DB.workout.insert({'date' : form.workout_date.data.isoformat(), 
-            'basic_data' : {'name' : workout_name,  'journal' : form.workout_journal.data},
-            'tracking' : d })
+        DB.workout.insert({'date' : form.workout_date.data.isoformat(), 'name' : workout_name,  'journal' : form.workout_journal.data, 'tracking' : d })
         return redirect(url_for('index'))
     data={ 'name' : DB.workouts.find_one({'name' : workout_name})['name'], 'exercises' : exercises }
-    return render_template("worksheet.html", data=data, form=form, title="SmallStuff", links=LINKS, date=date.today().strftime("%Y-%m-%d"))
+    return render_template("worksheet.html", data=data, history=get_lastWorksheet(workout_name), form=form, title="SmallStuff", links=LINKS, date=date.today().strftime("%Y-%m-%d"))
 
 @app.route("/new_exercise", methods = ['GET', 'POST'])
 def new_exercise():

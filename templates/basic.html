@@ -2,12 +2,15 @@
 <title>{{ title }}</title>
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
 <div>
-<div class=navbar>
-{% for link in links %}
-<a href='{{ links[link] }}'>{{ link }}</a><br> 
-{% endfor %}
-</div>
-<div class=page>
-    {% block body %}{% endblock %}
-</div>
+    <div class=navbar>
+        {% for link in links %}
+        <a href='{{ links[link] }}'>{{ link }}</a><br> 
+        {% endfor %}
+    </div>
+    <div class=page>
+        {% block body %}{% endblock %}
+    </div>
+    <!--<div class=history>
+        {% block history %}{% endblock %}
+    </div>-->
 </div>

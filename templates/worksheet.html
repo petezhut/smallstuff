@@ -5,24 +5,77 @@
     <fieldset><legend>Basic Data</legend>
         <table>
             <tr><td>Workout Date</td><td>{{ form.workout_date }}</td></tr>
-            <tr><td>Workout Journal</td><td>{{ form.workout_journal(rows=30, cols=50) }}</td></tr>
+            <tr><td>Workout Journal</td><td>{{ form.workout_journal(rows=15, cols=50) }}</td></tr>
+            <tr><td>Workout Journal - {{ history['date'] }}</td><td>{{ history['journal'] }}</td></tr>
         </table>
     </fieldset>
     </div>
     <div class=formdata>
     <fieldset><legend>Exercise Data</legend>
         <table>
+            <tr>
+                <th>Exercise</th>
+                <th colspan=2>Sets</th>
+                <th colspan=2>Reps</th>
+                <th colspan=2>Weight</th>
+                <th colspan=2>Time</th>
+                <th colspan=2>Distance</th>
+                <th colspan=2>Journal</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th>Today</th><th>{{ history['date'] }}</th>
+                <th>Today</th><th>{{ history['date'] }}</th>
+                <th>Today</th><th>{{ history['date'] }}</th>
+                <th>Today</th><th>{{ history['date'] }}</th>
+                <th>Today</th><th>{{ history['date'] }}</th>
+                <th>Today</th><th>{{ history['date'] }}</th>
+            <tr>
             {% for exercise_data in data['exercises'] %}
                 {% for exercise in exercise_data %}
-                    <tr><td>{{ exercise }}</td>
-                    {% for exercise_tracking in exercise_data[exercise] %}
-                        <td>{{ exercise_tracking }}: <input type=text name={{ exercise }}_{{ exercise_tracking }}></td>
-                    {% endfor %}
+                    <tr id=exercise><td>{{ exercise }}</td>
+                    {% if "Sets" in exercise_data[exercise] %}
+                        <td><input type=text name={{ exercise }}_Sets size=10></td>
+                        <td align=center>{{ history['tracking'][exercise]['Sets'] }}</td>
+                    {% else %}
+                        <td></td>
+                        <td></td>
+                    {% endif %}
+                    {% if "Reps" in exercise_data[exercise] %}
+                        <td><input type=text name={{ exercise }}_Reps size=10></td>
+                        <td align=center>{{ history['tracking'][exercise]['Reps'] }}</td>
+                    {% else %}
+                        <td></td>
+                        <td></td>
+                    {% endif %}
+                    {% if "Weight" in exercise_data[exercise] %}
+                        <td><input type=text name={{ exercise }}_Weight size=10></td>
+                        <td align=center>{{ history['tracking'][exercise]['Weight'] }}</td>
+                    {% else %}
+                        <td></td>
+                        <td></td>
+                    {% endif %}
+                    {% if "Time" in exercise_data[exercise] %}
+                        <td><input type=text name={{ exercise }}_Time size=10></td>
+                        <td align=center>{{ history['tracking'][exercise]['Time'] }}</td>
+                    {% else %}
+                        <td></td>
+                        <td></td>
+                    {% endif %}
+                    {% if "Distance" in exercise_data[exercise] %}
+                        <td><input type=text name={{ exercise }}_Distance size=10></td>
+                        <td align=center>{{ history['tracking'][exercise]['Distance'] }}</td>
+                    {% else %}
+                        <td></td>
+                        <td></td>
+                    {% endif %}
+                    <td><textarea name={{ exercise }}_journal cols=20 rows=5></textarea></td>
+                    <td><textarea cols=20 rows=5>{{ history['tracking'][exercise]['journal'] }}</textarea></td>
                 {% endfor %}
-            </tr>
             {% endfor %}
         </table>
     </fieldset>
     <input type=submit value="Submit Worksheet">
+    </div>
 </form>
 {% endblock %}
