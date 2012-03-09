@@ -1,17 +1,19 @@
 {% extends "basic.html" %}
 {% block body %}
 <form method="post" action="/workout/{{ data['name'] }}">
-    <div class=formdata>
-    <fieldset><legend>Basic Data</legend>
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-1">Basic Data</a></li>
+            <li><a href="#tabs-2">Worksheet</a></li>
+        </ul>
+    <div id='tabs-1'>
         <table>
-            <tr><td width=20%>Workout Date</td><td>{{ form.workout_date }}</td></tr>
+            <tr><td width=20%>Workout Date</td><td><input type=text name='workout_date' id="datepicker"></input></td></tr>
             <tr><td width=20%>Workout Journal</td><td>{{ form.workout_journal(rows=15, cols=50) }}</td></tr>
             <tr><td width=20%>Workout Journal - {{ history['date'] }}</td><td>{{ history['journal'] }}</td></tr>
         </table>
-    </fieldset>
     </div>
-    <div class=formdata>
-    <fieldset><legend>Exercise Data</legend>
+    <div id='tabs-2'>
         <table>
             <tr>
                 <th>Exercise</th>
@@ -74,7 +76,7 @@
                 {% endfor %}
             {% endfor %}
         </table>
-    </fieldset>
+    </div>
     <input type=submit value="Submit Worksheet">
     </div>
 </form>

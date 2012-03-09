@@ -32,7 +32,7 @@ def workout(workout_name):
                 d[exercise]['journal'] = request.form['%s_journal' % (exercise)]
                 for exercise_tracking in exercise_d[exercise]:
                     d[exercise][exercise_tracking] = request.form['%s_%s' % (exercise, exercise_tracking)]
-        DB.workout.insert({'date' : form.workout_date.data.isoformat(), 'name' : workout_name,  'journal' : form.workout_journal.data, 'tracking' : d })
+        DB.workout.insert({'date' : form.workout_date.data, 'name' : workout_name,  'journal' : form.workout_journal.data, 'tracking' : d })
         return redirect(url_for('index'))
     data={ 'name' : DB.workouts.find_one({'name' : workout_name})['name'], 'exercises' : exercises }
     return render_template("worksheet.html", data=data, history=get_lastWorksheet(workout_name), form=form, title="SmallStuff", date=date.today().strftime("%Y-%m-%d"))

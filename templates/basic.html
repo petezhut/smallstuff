@@ -1,11 +1,31 @@
-<!doctype html>
-<title>{{ title }}</title>
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
-<div>
-    <div class=navbar>
-        <a href='/exercises'>Exercises</a> | <a href='/workouts'>Workouts</a>
-    </div>
-    <div class=page>
-        {% block body %}{% endblock %}
-    </div>
-</div>
+<!DOCTYPE html>
+<html>
+	<head>
+        <title>{{ title }}</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <link type="text/css" href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" />	
+        <link type="text/css" href="{{ url_for('static', filename='css/ui-lightness/jquery-ui-1.8.18.custom.css') }}" rel="stylesheet" />	
+        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.7.1.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-ui-1.8.18.custom.min.js') }}"></script>
+		<script type="text/javascript">
+			$(function(){
+				// Tabs
+				$('#tabs').tabs();
+				$('#datepicker').datepicker({
+					inline: true
+				});
+                $("#format").change(function() {
+                    $("#datepicker").datepicker("option", "dateFormat", "yy-mm-dd");
+                });
+			});
+		</script>
+    </head>
+        <div id="navbar">
+              <a href='/exercises'>Exercises</a> | <a href='/workouts'>Workouts</a>
+        </div>
+        <div class=page>
+            {% block body %}{% endblock %}
+		</div>
+</html>
+
+

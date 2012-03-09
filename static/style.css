@@ -1,7 +1,6 @@
-body {
-    font-family: sans-serif;
-    font-size: .7em;
+body { 
     background: #eee;
+    font-family: "Trebuchet MS", sans-serif; 
 }
 
 table {
@@ -46,6 +45,7 @@ td.nodata {
     position: absolute;
     top: 4em;
     left: 5px;
+    font-size: .75em;
 }
 
 .navbar {
@@ -57,11 +57,5 @@ td.nodata {
     position: absolute;
     top: 1px;
     left: 5px;
-}
-.worksheet {
-    background: #ccc;
-}
-
-.formdata {
-    background: white;
+    font-size: 1.1em;
 }
